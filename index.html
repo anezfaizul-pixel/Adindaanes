@@ -98,31 +98,42 @@ body {
     <div class="progress">
       <div class="progress-bar" style="width: 85%;">85%</div>
     </div>
+
+    <div class="skill">
+    <span>Python</span>
+    <div class="progress">
+      <div class="progress-bar" style="width: 70%;">70%</div>
+    </div>
   </div>
 </section>
 
   <!-- PROJECTS -->
-  
-<section id="projects" class="section card">
+  <section id="projects" class="section card">
   <h2>Project Saya</h2>
-
-  <div class="project">
+<div class="project">
     <img src="fotoanez/qq.jpg" class="project-img" alt="Lampu Nyala">
     <h3>Lampu Nyala & Mati</h3>
     <p>Proyek ini menggunakan Arduino/ESP untuk membuat lampu yang dapat menyala dan mati secara otomatis.</p>
+    <button class="detail-btn" onclick="showDetail('lampu')">Lihat Detail</button>
+
   </div>
 
   <div class="project">
     <img src="fotoanez/rr.jpg" class="project-img" alt="Robot Avoider">
     <h3>Robot Avoider</h3>
     <p>Robot ini mampu menghindari halangan menggunakan sensor ultrasonik dan motor driver.</p>
+    <button class="detail-btn" onclick="showDetail('avoider')">Lihat Detail</button>
+
   </div>
 
   <div class="project">
     <img src="fotoanez/1.jpeg" class="project-img" alt="Pengukur Jarak">
     <h3>Alat Pengukur Jarak</h3>
     <p>Menggunakan sensor HC-SR04 untuk mengukur jarak objek secara real-time.</p>
+    <button class="detail-btn" onclick="showDetail('jarak')">Lihat Detail</button>
   </div>
+  
+
 
 </section>
 
@@ -327,6 +338,90 @@ body {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 </script>
+
+<!-- Modal -->
+<div id="detailModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeDetail()">&times;</span>
+    <h3 id="detail-title"></h3>
+    <p id="detail-body"></p>
+  </div>
+</div>
+
+<script>
+function showDetail(project) {
+  let title = "";
+  let body = "";
+
+  if (project === "lampu") {
+    title = "Lampu Nyala & Mati";
+    body = `
+    <b>Alat & Bahan:</b><br>
+    - Arduino / ESP32<br>
+    - LED<br>
+    - Resistor 220 ohm<br>
+    - Kabel jumper<br><br>
+
+    <b>Cara Kerja:</b><br>
+    LED dikontrol melalui pin digital, bisa dibuat nyala–mati otomatis atau lewat tombol.<br><br>
+
+    <b>Cara Membuat:</b><br>
+    1. Hubungkan LED ke pin 13/2.<br>
+    2. Tambahkan resistor 220 ohm.<br>
+    3. Upload program blink.<br>
+    4. LED akan berkedip otomatis.
+    `;
+  }
+
+  if (project === "avoider") {
+    title = "Robot Avoider";
+    body = `
+    <b>Alat & Bahan:</b><br>
+    - Arduino / ESP<br>
+    - Motor driver L298N<br>
+    - Ultrasonic HC-SR04<br>
+    - Motor DC + roda<br>
+    - Baterai 18650<br><br>
+
+    <b>Cara Kerja:</b><br>
+    Sensor membaca jarak, jika terlalu dekat robot berbelok menghindari halangan.<br><br>
+
+    <b>Cara Membuat:</b><br>
+    1. Pasang motor ke L298N.<br>
+    2. Pasang sensor ultrasonik ke pin trig & echo.<br>
+    3. Upload program avoider.<br>
+    4. Robot berjalan dan menghindar otomatis.
+    `;
+  }
+
+  if (project === "jarak") {
+    title = "Alat Pengukur Jarak";
+    body = `
+    <b>Alat & Bahan:</b><br>
+    - Arduino / ESP<br>
+    - HC-SR04<br>
+    - Kabel jumper<br><br>
+
+    <b>Cara Kerja:</b><br>
+    Sensor memancarkan gelombang ultrasonik dan menghitung waktu pantulan.<br><br>
+
+    <b>Cara Membuat:</b><br>
+    1. Sambungkan trig & echo ke pin digital.<br>
+    2. Upload program pembaca jarak.<br>
+    3. Jarak tampil di serial monitor / LCD.
+    `;
+  }
+
+  document.getElementById("detail-title").innerHTML = title;
+  document.getElementById("detail-body").innerHTML = body;
+  document.getElementById("detailModal").style.display = "block";
+}
+
+function closeDetail() {
+  document.getElementById("detailModal").style.display = "none";
+}
+</script>
+
 
 
 
